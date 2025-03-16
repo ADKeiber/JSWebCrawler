@@ -29,7 +29,6 @@ async function decodeMessage(url){
         var xIndex = 0
         var yIndex = 0
         var lineData = ""
-        console.log(decodedData[0][1])
         for(let i = 0 ; i < decodedData.length; i++){
             let datum = decodedData[i]
             if(datum[2] == yIndex){
@@ -73,7 +72,6 @@ function getData(htmlBody){
             parseInt(node.textContent), 
             tableCells.iterateNext().textContent.trim().codePointAt(0).toString(16), 
             parseInt(tableCells.iterateNext().textContent)]
-        console.log(value)
         data.push(value)
 
         node = tableCells.iterateNext()
@@ -81,23 +79,24 @@ function getData(htmlBody){
     }
 
     sortData(data, 1, 0)
-
+    console.log(data)
 
     return data
 }
 
 function sortData(array) {
     array.sort((a, b) => {
-    if (a[0] < b[0]) {
-      return -1;
-    }
-    if (a[0] > b[0]) {
-      return 1;
-    }
+    
     if (a[2] < b[2]) {
       return -1;
     }
     if (a[2] > b[2]) {
+      return 1;
+    }
+    if (a[0] < b[0]) {
+      return -1;
+    }
+    if (a[0] > b[0]) {
       return 1;
     }
     return 0;
